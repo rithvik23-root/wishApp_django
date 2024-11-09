@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>WishApp - My Gifts</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}" />
+  </head>
+  <body>
+    <h1>{{ user.username }}'s Gifts</h1>
+
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+      <li>
+        {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message
+        }}
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
+    <h2>Add a New Gift</h2>
+    <form class="giftsForm" method="post" action="{% url 'gifts' %}">
+      {% csrf_token %}
+      <div>
+        <label for="gift_name">Gift Name:</label>
+        <input type="text" id="gift_name" name="gift_name" required />
+      </div>
+      <button type="submit">Add Gift</button>
+    </form>
+    <div class="s">
+      <h2>Current Gifts</h2>
+      <ul>
+        {% for gift in gifts %}
+        <li>{{ gift.gift_name }}</li>
+        {% empty %}
+        <li>No gifts added yet.</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="d">
+      <h2>Gift Lists of Other Users:</h2>
+      <ul>
+        {% for user in users %}
+        <li>
+          {{ user.username }}'s Gifts -
+          <a href="{% url 'other_users_gifts' user.id %}">View</a>
+        </li>
+        {% endfor %}
+      </ul>
+      <a href="{% url 'home' %}">Back to Home</a>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>WishApp - Other User's Gifts</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}" />
+  </head>
+  <body>
+    <div class="x">
+      <h1>Gifts List of {{ other_user.username }}</h1>
+
+      <ul>
+        {% for gift in gifts %}
+        <li>{{ gift.gift_name }}</li>
+        {% empty %}
+        <li>This user has no gifts added yet.</li>
+        {% endfor %}
+      </ul>
+
+      <a href="{% url 'gifts' %}">Back</a>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WishApp - Users</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}"><!-- Add any additional CSS or JS here -->
+</head>
+<body>
+    <h1>Users</h1>
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li>{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <form class="loginForm" method="get" action="{% url 'other_users_gifts' 1 %}">
+        <label for="user_select">Select a user to view their gifts:</label>
+        <select name="user_id" id="user_select" onchange=this.form.submit()>
+            <option value="">Select a User</option>
+            {% for user in users %}
+            <option value="{{ user.id }}">{{ user.username }}</option>
+            {% endfor %}
+        </select>
+    </form>
+
+
+    <a href="{% url 'home' %}">Back to Home</a>
+</body>
+</html>

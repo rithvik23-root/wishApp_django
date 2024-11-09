@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WishApp - Error</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <div class="loginForm error">
+        <h1>Error</h1>
+        <p>An error has occurred. Please try again.</p>
+    
+        <p>Login is required to access this page.</p>
+    
+        <a href="{% url 'home' %}">Login</a> |
+        <a href="{% url 'registration' %}">Register</a>
+    </div>
+   
+</body>
+</html>
